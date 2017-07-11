@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Admin panel</title>
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/admin.js"></script>
+</head>
+
+<body>
+    <header>
+        <div><img src="images/logo4.png" id="admin-panel-logo"></div>
+        <div>Ecliptica Admin-panel</div>
+        <div><a href="#" class="fa fa-sign-out">Logout</a></div >
+    </header>
+    
+    <div id="main-container">
+    
+        <div id="left-navigation">
+            <ul>
+                <div id="navigation-komponente" class="navigation-element">
+                    <li><a class="active" href="#">Komponente<img src="images/admin/component.png" class="navigation-image"></a></li>
+                </div>
+                <div id="navigation-kategorije" class="navigation-element">
+                    <li><a href="#">Kategorije<img src="images/admin/category.png" class="navigation-image"></a></li>
+                </div>
+                <div id="navigation-uredjaji" class="navigation-element">
+                    <li><a href="#">Uredjaji<img src="images/admin/custom-built.png" class="navigation-image"></a></li>
+                </div>
+                <div id="navigation-konfigurator" class="navigation-element">
+                    <li><a href="#">Konfigurator<img src="images/admin/configurator.png" class="navigation-image"></a></li>
+                </div>
+            </ul>
+        </div>
+
+        <!-- KOMPONENTE MANIPULACIJA -->
+        <div id="main-content-komponente" class="main-content" style="display:block;" >
+            
+            <div id="add-new-komponente-window" class="add-new-modal-window" style="display:none">
+                <h2>Dodavanje nove komponente</h2>
+                <form id="add-new-komponente-form" action="ComponentController" method="post">
+                    <input type="text" name="imageLink" id="compImg"  placeholder="Img URL" required>
+                    <input type="text" name="name" id="compName"  placeholder="Naziv" required>
+                    <input type="number" name="price" id="compPrice" placeholder="Cena" required>
+                    <input type="number" name="availableQuantity" id="compQuantity" placeholder="Rasp kol" required>
+                    <input type="text" name="description" id="compDescr" placeholder="Opis" required>
+                    <div style="margin-bottom:10px;">
+                        <label>Kategorija:</label>
+                        <select name="category" id="select-kategorijeZaKomponente" form="add-new-komponente-form"></select>
+                    </div>
+                    <input type="text" name="linkManifacturer" id="compManLink" placeholder="Link" required>
+                    <input type="text" name="compCode" id="compCode" style="display:none;">
+                    <input type="text" name="purpose" id="compPurpose" style="display:none;">
+                    <div>
+                        <input type="button" value="Odustani" class="nero-btn" id="add-new-komponente-window-close">
+                        <input type="submit" value="Potvrdi" class="nero-btn">
+                    </div>
+                </form>
+            </div>
+            
+            <div id="filter-komponente-button">
+                <a href="#" title="Filter search" class="fa fa-filter fa-4x"></a>
+            </div>
+            
+            <div id="add-new-komponente-button" class="add-new">
+                <a href="#" title="Add new" class="fa fa-plus-square fa-4x"></a>
+            </div>
+            
+            
+            
+            <form action="ComponentController" id="searchFormKomponente" class="searchForm"><!-- za bekend method="post"-->
+                <input id="searchTextKomponente" type="text" class="searchInput" autocomplete="off" placeholder="Pretrazite">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </form>
+            
+            <div id="tabela-container">
+                <table id="tabela-rezultati-komponente" class="tabela-rezultati">
+                    <thead>
+                        <tr>
+                            <th id="th-id">ID</th>
+                            <th id="th-picture">Slika</th>
+                            <th id="th-product">Naziv</th>
+                            <th id="th-price">Cena</th>
+                            <th id="th-quant">Rasp kol</th>
+                            <th id="th-descr">Opis</th>
+                            <th id="th-subcat">Podkategorija</th>
+                            <th id="th-link">Link</th>
+                            <th id="th-action">Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- generated table rows -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="filter-panel-komponente" style="display:none;">
+                <div style="font-size:1.5em;padding-bottom:15px;">Filter komponenti</div>
+                <form action="ComponentController" id="filter-triggerKomponente">
+                <div id="filter-cijena">
+                    <div>Cijena</div>
+                    <input name="priceFrom" type="number" placeholder="Od" required>
+                    <input name="priceTo" type="number" placeholder="Do" required>
+                </div>
+                <div id="filter-rasp-kol">
+                    <div>Raspoloziva kolicina</div>
+                    <input name="availableQuantity" type="number" required>
+                </div>
+                <div id="filter-opis">
+                    <div>Opis</div>
+                    <textarea name="description" style="width:180px; height:150px" required></textarea>
+                </div>
+                <div id="filter-kat">
+                    <label>Kategorija</label>
+                    <select name="category" id="select-filterKomponente" required></select>
+                </div>
+                    <input type="submit" value="Osvezi rezultate" style="margin-top:20px; float:right; font-size:1em">
+                    </form>
+            </div>
+            
+            
+        </div>
+        
+        <!-- KATEGORIJE MANIPULACIJA -->
+        <div id="main-content-kategorije" class="main-content" style="display:none">
+            
+            <div id="add-new-kategorije-window" class="add-new-modal-window" style="display:none">
+                <h2>Dodavanje nove kategorije</h2>
+                <form id="add-new-kategorije-form" action="CategoryController" method="post">
+                    <input type="text" name="name" id="catName"  placeholder="Naziv" required>
+                    <input type="text" name="description" id="catDescr"  placeholder="Opis" required>
+                    <div style="margin-bottom:10px;">
+                        <label>Podkategorija:</label>
+                        <select name="subcategory" id="select-podkategorijeZaKategorije" form="add-new-kategorije-form">
+                            <option value="0" selected>No category</option>
+                        </select>
+                    </div>
+                    <input type="text" name="catCode" id="catCode" style="display:none;">
+                    <input type="text" name="purpose" id="catPurpose" style="display:none;">
+                    <div>
+                        <input type="button" value="Odustani" class="nero-btn" id="add-new-kategorije-window-close">
+                        <input type="submit" value="Potvrdi" class="nero-btn">
+                    </div>
+                </form>
+            </div>
+            
+            <div id="add-new-kategorije-button" class="add-new">
+                <a href="#" title="Add new" class="fa fa-plus-square fa-4x"></a>
+            </div>
+            
+            <div id="tabela-container">
+                <table class="tabela-rezultati" id="tabela-rezultati-kategorije">
+                    <thead>
+                    <tr>
+                        <th id="th-id">ID</th>
+                        <th id="th-product">Naziv</th>
+                        <th id="th-descr">Opis</th>
+                        <th id="th-subcat">Podkategorija</th>
+                        <th id="th-action">Akcija</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <!-- dinamicaly generated table rows -->
+                    </tbody>
+                        
+                </table>
+                
+            </div>
+            
+        </div>
+
+        <!-- UREDjAJI MANIPULACIJA -->
+        <div id="main-content-uredjaji" class="main-content" style="display:none;">
+            
+            <div id="add-new-uredjaji-window" class="add-new-modal-window" style="display:none;">
+                <h2>Izmjena uredjaja</h2>
+                <form id="edit-existing-uredjaji-form">
+                    <input id="machName" type="text" name="name" placeholder="Naziv">
+                    <input id="machDescr" type="text" name="description" placeholder="Opis">
+
+                    <table id="tabela-edit-machine" style="margin:0 auto; margin-bottom:30px; ">
+                    <thead>
+                        
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td align="center">CPU</td>
+                            <td align="center"><select id="select-devEditCPU" name="deviceCPU"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">Maticna ploca</td>
+                            <td align="center"><select id="select-devEditMB" name="deviceMB"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">HDD</td>
+                            <td align="center"><select id="select-devEditHDD" name="deviceHDD"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">RAM memorija</td>
+                            <td align="center"><select id="select-devEditRAM" name="deviceRAM"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">Graficka kartica</td>
+                            <td align="center"><select id="select-devEditVGA" name="deviceVGA"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">Kuciste</td>
+                            <td align="center"><select id="select-devEditCasing" name="deviceCasing"></select></td>
+                        </tr>
+                    </tbody>
+                </table>
+                    <input id="machCode" type="text" name="code" style="display:none;">
+                    <div>
+                        <input type="button" value="Odustani" class="nero-btn" id="add-new-uredjaji-window-close">
+                        <input type="submit" value="Potvrdi" class="nero-btn">
+                    </div>
+                </form>
+            </div>
+            
+            
+            <div id="filter-uredjaji-button">
+                <a href="#" title="Filter search" class="fa fa-filter fa-4x"></a>
+            </div>
+            
+
+            
+            
+            <form action="CustomMachineController" id="searchFormUredjaji" class="searchForm">
+                <input id="searchTextUredjaji" type="text" class="searchInput" autocomplete="off" placeholder="Pretrazite">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </form>
+            
+            <div id="filter-panel-uredjaji" style="display:none;">
+                <div style="font-size:1.5em;padding-bottom:15px;">Filter uredjaja</div>
+                <form action="CustomMachineController" id="filter-triggerUredjaji">
+                
+                <div id="filter-opis">
+                    <div>Opis</div>
+                    <textarea name="description" style="width:200px; height:80px;" required></textarea>
+                </div>
+                <div id="filter-komp">
+                    <div style="margin-bottom:20px">Komponente:</div>
+                    <div>
+                        <label>Graficka</label>
+                        <select name="deviceVGA" id="select-devFilterVGA"></select>
+                    </div>
+                    <div>
+                        <label>Procesor</label>
+                        <select name="deviceCPU" id="select-devFilterCPU"></select>
+                    </div>
+                    <div>
+                        <label>RAM mem</label>
+                        <select name="deviceRAM" id="select-devFilterRAM"></select>
+                    </div>
+                    <div>
+                        <label>Maticna ploca</label>
+                        <select name="deviceMB" id="select-devFilterMB"></select>
+                    </div>
+                    <div>
+                        <label>Memorija</label>
+                        <select name="deviceHDD" id="select-devFilterHDD"></select>
+                    </div>
+                    <div>
+                        <label>Kuciste</label>
+                        <select name="deviceCasing" id="select-devFilterCasing"></select>
+                    </div>
+                </div>
+                    
+                
+                    <input type="submit" value="Osvezi rezultate" style="margin-top:20px; float:right; font-size:1em">
+                    </form>
+            </div>
+            
+            <div id="tabela-container">
+                <table id="tabela-rezultati-uredjaji" class="tabela-rezultati" >
+
+                <thead>
+                <tr>
+                    <th id="th-id">ID</th>
+                    <th id="th-product">Naziv</th>
+                    <th id="th-descr">Opis</th>
+                    <th id="th-cpu">CPU</th>
+                    <th id="th-mb">Maticna ploca</th>
+                    <th id="th-cpu">HDD</th>
+                    <th id="th-cpu">RAM</th>
+                    <th id="th-cpu">Grafika</th>
+                    <th id="th-cpu">Kuciste</th>
+                    <th id="th-action">Akcija</th>
+                </tr>
+                </thead>
+                    
+                <tbody>
+                    
+                </tbody>
+                </table>
+            </div>
+        </div>
+  
+
+        <div id="main-content-konfigurator" class="main-content" style="display:none">
+            <h2 style="font-size:2em; margin-bottom:50px;">Ecliptica configurator</h2>
+            
+        <form id="configuration-machine" action="CustomMachineController" method="post">
+                    <div style="margin-left:35%;margin-bottom:10px;">
+                        <label>Ime uredjaja:</label>
+                        <input type="text" id="conf-device-name" name="deviceName" style="height:20px; width:300px;" required>
+                    </div>
+
+                    <div style="margin-left:34.7%; margin-bottom:50px;">
+                        <label>Opis uredjaja:</label>
+                        <input type="text-area" id="conf-device-descr" name="deviceDescr" style="height:30px; width:300px;" required>
+                    </div>
+                
+            <div id="tabela-container-configurator">
+                <div style="text-align:center; margin-bottom:10px; font-size:1.2em;">Osnovne komponente</div>
+                
+                <table id="tabela-configurator-osnovni" class="tabela-configurator" >
+                    <thead>
+                        <tr>
+                            <th id="th-prodType">Vrsta komponente</th>
+                            <th id="th-prod">Komponenta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td align="center">CPU</td>
+                            <td align="center"><select id="select-conf-cpu" name="deviceCPU" form="configuration-machine"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">Maticna ploca</td>
+                            <td align="center"><select id="select-conf-mb" name="deviceMB" form="configuration-machine"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">HDD</td>
+                            <td align="center"><select id="select-conf-hdd" name="deviceHDD" form="configuration-machine"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">RAM memorija</td>
+                            <td align="center"><select id="select-conf-ram" name="deviceRAM" form="configuration-machine"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">Graficka kartica</td>
+                            <td align="center"><select id="select-conf-vga" name="deviceVGA" form="configuration-machine"></select></td>
+                        </tr>
+                        <tr>
+                            <td align="center">Kuciste</td>
+                            <td align="center"><select id="select-conf-house" name="deviceCasing" form="configuration-machine"></select></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                
+                
+                <input type="submit" id="btnMake" value="Napravi!" style="margin-top:50px; margin-left:68%;" class="nero-btn">
+            </div>
+            
+        </form>
+            
+        </div>
+        
+    </div>
+    
+</body>
+</html>
+<link rel="stylesheet" href=""><script src=""></script>

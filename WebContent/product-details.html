@@ -1,0 +1,385 @@
+<!doctype HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ecliptica shop</title>
+	<link rel="shortcut icon" type = "image/png" href = "images/logo3.png">
+	<link rel="stylesheet" type = "text/css" href = "css/index.css">
+	<link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+</head>
+
+<body>
+    <div class="dimmer">
+        
+    </div>
+
+	<header>
+		<!--Top of the page-->
+		<div class = "top-header">
+			<div class = "top-header-content">
+				<i class="fa fa-sign-in"></i>
+				<a href="#" id="login">Prijavi se</a>
+				<i class="fa fa-user-plus"></i>
+				<a href="#" id="register">Registruj se</a>
+				
+			</div>
+		</div>
+
+        <!--Main header of the page-->
+		<div class = "header-content">
+			<!-- logo & firm name-->
+			<span id="logo-container">
+				<a title="Home" href="index.html">
+				    <img src="images/logo3.png" class="header-logo" />
+				</a>
+			</span>
+            <span id="logo-name">
+                <h1>E c l i p t i c a&trade;</h1>
+                <h2>Computer web shop</h2>
+            </span>
+            
+            <form action="#" method="post" id="searchForm">
+                <input type="text" id="searchInput" autocomplete="off" placeholder="Pretrazite sajt">
+                <button type="submit" id="searchButton">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </form>
+		</div>
+        
+        
+        
+	</header>
+    
+    
+    <nav class="main-nav">
+        <div class="navigation-span"></div>
+        <ul>
+            <li class="main-nav-item"><a href="index.html">Naslovna</a>
+            <li class="main-nav-item"><a href="#">Konfigurator</a>
+            <li class="main-nav-item"><a href="#">Popusti</a>
+            <li class="main-nav-item"><a href="#">Ponuda</a>
+            <li class="main-nav-item"><a href="#">O nama</a>
+            
+        </ul>
+        <!-- Wishlist & shopping cart-->
+        <div class="shopping-container">
+            <a class="fa fa-shopping-cart fa-2x" href="shoppingCart-content.html"    title="Korpa"></a>
+            <a class="fa fa-check-square-o fa-2x" href="#" title="Zelje"></a>
+            
+        </div>
+            
+                
+    </nav>
+    
+
+
+	
+        
+
+
+
+
+<!--Modal windows-->
+
+  <div id="loginmodal" style="display:none;">
+  	<div class="arrow-up"></div>
+    <h1>User Login</h1><span><img src="images/cancel.png" class="cancel-btn"></span>
+    <form id="loginform" name="loginform" method="post" action="index.html">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" class="txtfield" tabindex="1" required>
+      
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" class="txtfield" tabindex="2" required>
+      
+      <div class="center"><input type="submit" name="loginbtn" id="loginbtn" class="flatbtn-blu hidemodal" value="Log In" tabindex="3"></div>
+    </form>
+  </div>
+    
+    
+    <div id="registermodal" style="display:none;">
+  	<div class="arrow-up"></div>
+    <h1>User register</h1><span><img src="images/cancel.png" class="cancel-btn"></span>
+    <form id="loginform" name="loginform" method="post" action="index.html">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" class="txtfield" tabindex="1" required>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" class="txtfield" tabindex="2" required>
+        <label for="password">Repeat password:</label>
+      <input type="password" name="password" id="password" class="txtfield" tabindex="2" required> 
+      
+      <div class="center"><input type="submit" name="loginbtn" id="loginbtn" class="flatbtn-blu hidemodal" value="Register" tabindex="3"></div>
+    </form>
+  </div>
+    
+    
+
+
+	<!-- Main content -->
+	<div class="main-content">
+        
+        
+        
+    
+	
+	<!-- Left side of the page -->
+	<div class="category-menu">
+        <ul>
+            <li id="submenu-categories">
+                <img src="images/linkIcons/sivi/categories-icon.png" class="submenu-image"/>
+                
+                <a href='#' class="menu-item">Kategorije</a>
+            </li>
+            <li class="submenu-item" >
+                <a href='#' class="menu-item">
+               
+                <div class="submenu-content">
+                <i class="fa fa-angle-right"></i>
+                <img src="images/linkIcons/sivi/desktop.png" class="submenu-image"/>
+                    PC</a>
+                </div>
+            </li>
+
+            <li class="submenu-item">
+                <a href='#' class="menu-item">
+               
+                <div class="submenu-content">
+                <i class="fa fa-angle-right"></i>
+                <img src="images/linkIcons/sivi/laptop.png" class="submenu-image"/>
+                    Laptop</a>
+                </div>
+
+            </li>
+
+            <li class="submenu-item">
+                <a href='#' class="menu-item">
+               
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/linkIcons/sivi/all-in-one.png" class="submenu-image"/>
+                    All in one</a>
+                </div>
+            </li>
+
+            <li class="submenu-item">
+                <a href='#' class="menu-item">
+               
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/linkIcons/sivi/tablet-fablet.png" class="submenu-image"/>
+                    Tablet/fablet</a>
+                </div>
+            </li>
+
+            <li class="submenu-item">
+                <a href='#' class="menu-item">
+               
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/linkIcons/sivi/monitor.png" class="submenu-image"/>
+                    Monitori</a>
+                </div>
+
+            </li>
+
+            <li class="submenu-item">
+                <a href='#' class="menu-item">
+                
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/linkIcons/sivi/cpu.png" class="submenu-image"/>
+                    Procesori</a>
+                </div>
+            </li>
+            <li class="submenu-item">
+                <a href='#' class="menu-item">
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/linkIcons/sivi/memory.png" class="submenu-image"/>
+                    Memorije</a>
+                </div>
+        </ul>
+    </div>
+
+
+    
+        <!-- PRODUCT DETAILS -->
+        
+    <div class="product-details">
+        
+        
+        <div class="product-details-header">
+            
+            <span class="product-image-container">
+                <h2 class="product-details-title">i-mac 4th gen</h2>
+                <img src="images/products/i-mac.png" class="product-details-image">
+            </span>
+            <div class="vertical-line"></div>
+            <div class="product-details-container">
+                <div class="product-details-first-subcontainer">
+                    <a href="#" title="Kategorija">Racunari</a>
+                    <span>| ID proizvoda: 28512039</span>
+                    <span>| Sifra proizvoda: DkJNWI399</span>
+                </div>
+                <div class="product-details-second-subcontainer">
+                    <span class="rating">
+                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                    </span>
+                    <span>|<i class="fa fa-check-circle-o" aria-hidden="true"></i> Na lageru|</span>
+
+
+                    <span><i class="fa fa-clock-o" aria-hidden="true"></i> Ocekivani rok isporuke: 3 dana</span>
+                </div>
+                <div class="product-details-third-subcontainer">
+                    <h1>Cena: 89.999 RSD</h1><span><h2>Mp: 95.999</h2></span>
+                </div>
+                    
+                <div class="product-details-fourth-subcontainer">
+                    <h1>Dodaj u korpu</h1>
+                    <span class="product-details-add-to-cart">
+                        <a href="#" title="Kupi">
+                        <img src="images/shopping-cart.png" class="product-details-shopping-cart"/></a>
+                    </span>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+        
+        
+        <div class="product-details-table-container">
+            <table class="product-details-table">
+           
+
+            <thead>
+                <tr>
+                    <th colspan="2" align="left">Detalji o proizvodu</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="first-table-column">Proizvodjac</td>
+                <td class="second-table-column">Sljamsung</td>
+            </tr>
+            <tr>
+                <td class="first-table-column">Model</td>
+                <td class="second-table-column">Cant c#</td>
+            </tr>
+            <tr>
+                <td class="first-table-column">Karakteristika 1</td>
+                <td class="second-table-column">Vrijednost 1</td>
+            </tr>
+            <tr>
+                <td class="first-table-column">Karakteristika 2</td>
+                <td class="second-table-column">Vrijednost 2</td>
+            </tr>
+            <tr>
+                <td class="first-table-column">Karakteristika 3</td>
+                <td class="second-table-column">Vrijednost 3</td>
+            </tr>
+            <tr>
+                <td class="first-table-column">Karakteristika 4</td>
+                <td class="second-table-column">Vrijednost 4</td>
+            </tr>
+            <tr>
+                <td class="first-table-column">Karakteristika 5</td>
+                <td class="second-table-column">Vrijednost 5</td>
+            </tr>
+            <tr>
+                <td class="first-table-column">Karakteristika 6</td>
+                <td class="second-table-column">Vrijednost 6</td>
+            </tr>
+            <tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+        
+    
+
+
+
+	
+
+	
+
+	
+
+	
+
+    <div id="back-to-top">
+        <a href='#top' >
+        <i class="fa fa-chevron-up fa-3x"></i>
+        </a>
+    </div>
+
+    
+    <ul class="contact-us">
+      <li>
+        <a class="fa fa-phone" href="#">    
+          <span>Fiksni: 021/246-666</span>
+        </a> 
+      </li>
+
+      <li>
+        <a class="fa fa-mobile" href="#">
+          <span>Mobilni: 065/246-6668</span>
+        </a>
+      </li>
+        
+    
+
+      <li>
+        <a class="fa fa-envelope-o" href="mailto:stefanosengl@gmail.com?Subject=Postovani,%20imam jedno pitanje:">
+          <span>E-mail</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="fa fa-skype" href="skype:jecaraj?call">
+        <span>Skype</span>
+        </a> 
+      </li>
+        
+
+    </ul>
+
+    
+	<footer>
+        
+		<p>You Should Stay In Touch!</p>
+		<hr>
+		<div class="footer-social">
+        <ul>
+           <li>
+           <div id="circular-border">
+           	<a title="Get news and updates via Facebook" href="http://www.facebook.com"><img src="images/social/facebook.png" border="0"></a>
+           </div>
+           </li>
+           <li>
+           <div id="circular-border">
+           	<a title="Get news and updates via Google+" href="http://plus.google.com"><img src="images/social/googleplus.png" border="0"></a>
+           </div>
+           </li>
+           <li>
+           <div id="circular-border">
+           	<a title="Stay current on news via Twitter" href="https://www.twitter.com"><img src="images/social/twitter.png" border="0"></a>
+           </div>
+           </li>
+           <li>
+           <div id="circular-border">
+           	<a title="Contact us via e-mail address" href="#"><img src="images/social/mail.png" border="0"></a>
+           </div>
+           </li>
+        </ul>
+      </div>
+      <hr>
+		<p>Copyright &copy; Ecliptica Web Design 2015</p>
+	</footer>
+</body>
+
+</html>

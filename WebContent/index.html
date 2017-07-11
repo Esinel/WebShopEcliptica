@@ -1,0 +1,546 @@
+<!doctype HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ecliptica shop</title>
+  <link rel="shortcut icon" type = "image/png" href = "images/logo3.png">
+  <link rel="stylesheet" type = "text/css" href = "css/index.css">
+  <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/ajax-calls.js"></script>
+    
+    
+    <script>
+        function userCheck() {
+            var username = $('#registerform #username').val();
+            $.ajax({
+                method: "GET",
+                url: "RegisterServlet",
+                dataType: "json",
+                data: {'username': username},
+                success: function (response){
+                    var userInDB = response;
+                    if ($.isEmptyObject(userInDB)) {
+                        //username is valid
+                        $('#registerbtn').prop("disabled", false);
+                    } else {
+                        alert("Username je zauzet! Budi malo kreativniji!");
+                        $('#registerbtn').prop("disabled", true);
+                    }
+                }
+        });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="dimmer">
+        
+    </div>
+
+  <header>
+    <!--Top of the page-->
+    <div class = "top-header">
+      <div class = "top-header-content">
+        <i class="fa fa-sign-in"></i>
+        <a href="#" id="login">Prijavi se</a>
+        <i class="fa fa-user-plus"></i>
+        <a href="#" id="register">Registruj se</a>
+        
+      </div>
+    </div>
+
+        <!--Main header of the page-->
+    <div class = "header-content">
+      <!-- logo & firm name-->
+      <span id="logo-container">
+        <a title="Home" href="index.html">
+            <img src="images/logo3.png" class="header-logo" />
+        </a>
+      </span>
+            <span id="logo-name">
+                <h1>E c l i p t i c a&trade;</h1>
+                <h2>Computer web shop</h2>
+            </span>
+            
+            <form action="error-page.html" id="searchForm"><!-- za bekend method="post"-->
+
+                <input type="text" id="searchInput" autocomplete="off" placeholder="Pretrazite sajt">
+                <button type="submit" id="searchButton">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </form>
+    </div>
+        
+        
+        
+  </header>
+    
+    
+    <nav class="main-nav">
+        <div class="navigation-span"></div>
+        <ul>
+            <li class="main-nav-item"><a href="#">Naslovna</a>
+            <li class="main-nav-item"><a href="#">Konfigurator</a>
+            <li class="main-nav-item"><a href="#">Popusti</a>
+            <li class="main-nav-item"><a href="#">Ponuda</a>
+            <li class="main-nav-item"><a href="#contactPart">O nama</a>
+            
+        </ul>
+        <!-- Shopping cart-->
+        <div class="shopping-container">
+            <a class="fa fa-shopping-cart fa-2x" id="shoppingCart" href="shoppingCart-content.html" title="Korpa"></a>
+            <div id="shopping-cart-itemsCounter" style="color:#F65B5C;display:table-cell;vertical-align:middle;padding-top:15px;">6</div>
+        </div>
+ 
+                
+    </nav>
+    
+
+
+  
+        
+
+
+
+
+<!--Modal windows-->
+
+  <div id="loginmodal" style="display:none;">
+    <div class="arrow-up"></div>
+    <h1>User Login</h1><span><img src="images/cancel.png" class="cancel-btn"></span>
+    <form id="loginform" name="loginform">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" class="txtfield" tabindex="1" required>
+      
+      <label for="passwordd">Password:</label>
+      <input type="password" name="passwordd" id="passwordd" class="txtfield" tabindex="2" required>
+      
+      <div class="center"><input type="submit" name="loginbtn" id="loginbtn" class="flatbtn-blu hidemodal" value="Log In" tabindex="3"></div>
+    </form>
+  </div>
+    
+    
+    <div id="registermodal" style="display:none;">
+    <div class="arrow-up"></div>
+    <h1>User register</h1><span><img src="images/cancel.png" class="cancel-btn"></span>
+    <form id="registerform" name="registerform">
+        <label for="firstname">Firstname:</label>
+      <input type="text" name="firstname" id="firstname" class="txtfield" tabindex="1" required>
+        <label for="lastname">Lastname:</label>
+      <input type="text" name="lastname" id="lastname" class="txtfield" tabindex="2" required>
+        
+    <label for="username">Username:</label>
+      <input type="text" name="username" id="username" class="txtfield" tabindex="3" required onblur="userCheck()">
+    <label for="passwordd">Password:</label>
+      <input type="password" name="passwordd" id="passwordd" class="txtfield" tabindex="3" required>
+        <div id="checkBoxContainer">
+      <input type="checkbox" id="passCheck">
+    <label for="passCheck" id="passCheckLabel" style="display:inline-block; color:#F65B5C; font-size: 1em;">show password</label>
+            </div>
+    <label for="phoneNumber">Phone number:</label>
+      <input type="text" name="phoneNumber" id="phoneNumber" class="txtfield" tabindex="3" required>
+    <label for="email">Email:</label>
+      <input type="email" name="email" id="email" class="txtfield" tabindex="3" required>
+      
+      <span class="center"><input type="submit" name="registerbtn" id="registerbtn" class="flatbtn-blu hidemodal" value="Register" tabindex="3" disabled="true"></span>
+        <span><input type="button" id="clearBtn" class="flatbtn-blu hidemodal" value="Clear"></span>
+    </form>
+  </div>
+    
+    
+
+
+  <!-- Main content -->
+  <div class="main-content">
+        
+        
+        
+    <!-- Slide show-->
+  <div class="slider">
+     <div class="slide active-slide">
+      <img src="images/slide1.jpg" class="slikaja">
+    </div>
+    <div class="slide">
+      <img src="images/slide2.jpg" class="slikaja">
+    </div>
+    <div class="slide">
+      <img src="images/slide3.jpg" class="slikaja">
+    </div>
+    <div class="slide">
+      <img src="images/slide4.jpg" class="slikaja">
+    </div>
+
+    <div class="slider-nav">
+        <a href="#/" class="arrow-prev"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/arrow-prev.png"></a>
+        <ul class="slider-dots">
+          <li class="dot active-dot">&bull;</li>
+          <li class="dot">&bull;</li>
+          <li class="dot">&bull;</li>
+          <li class="dot">&bull;</li>
+        </ul>
+        <a href="#/" class="arrow-next"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/arrow-next.png"></a>
+      </div> 
+  </div>
+  
+  <!-- Left side of the page -->
+  <div class="category-menu">
+        <ul>
+            <li id="submenu-categories">
+                <img src="images/LinkIcons/sivi/categories-icon.png" class="submenu-image"/>
+                
+                <a href='#' class="menu-item">Kategorije</a>
+            </li>
+            
+            <li id="submenuMonitors" class="submenu-item">
+                <a href='#' class="menu-item">
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/LinkIcons/sivi/monitor.png" class="submenu-image"/>
+                    Monitori</a>
+                </div>
+            </li>
+            
+            <li id="submenuCPU" class="submenu-item">
+                <a href='#' class="menu-item">
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/LinkIcons/sivi/cpu.png" class="submenu-image"/>
+                    Procesori</a>
+                </div>
+            </li>
+            
+            <li id="submenuRAM" class="submenu-item">
+                <a href='#' class="menu-item">
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/LinkIcons/sivi/memory.png" class="submenu-image"/>
+                    RAM</a>
+                </div>
+            </li>
+            
+            
+
+            <li id="submenuMB" class="submenu-item">
+                <a href='#' class="menu-item">
+               
+                <div class="submenu-content">
+                <i class="fa fa-angle-right"></i>
+                <img src="images/LinkIcons/sivi/motherboard.png" class="submenu-image"/>
+                    Maticne ploce</a>
+                </div>
+
+            </li>
+
+            <li id="submenuVGA" class="submenu-item">
+                <a href='#' class="menu-item">
+               
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/LinkIcons/sivi/vga.png" class="submenu-image"/>
+                    Graficke karte</a>
+                </div>
+            </li>
+
+            <li id="submenuHDD" class="submenu-item">
+                <a href='#' class="menu-item">
+               
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/LinkIcons/sivi/hdd.png" class="submenu-image"/>
+                    Memorija</a>
+                </div>
+            </li>
+            
+            <li id="submenuCasing" class="submenu-item">
+                <a href='#' class="menu-item">
+               
+                <div class="submenu-content">
+                    <i class="fa fa-angle-right"></i>
+                    <img src="images/LinkIcons/sivi/casing.png" class="submenu-image"/>
+                    Kucista</a>
+                </div>
+            </li>
+      
+            <li id="submenuPC" class="submenu-item" >
+                <a href='#' class="menu-item">
+                <div class="submenu-content">
+                <i class="fa fa-angle-right"></i>
+                <img src="images/LinkIcons/sivi/desktop.png" class="submenu-image"/>
+                    PC Sistemi</a>
+                </div>
+            </li>
+
+            
+
+            
+            
+        </ul>
+    </div>
+    
+
+    <div id="products">
+
+        <div class="product">
+          <div class="product-title">
+            <a href="product-details.html">Šljam-sung</a>
+          </div>
+          <a href="product-details.html" class="product-image">
+            <img src="images/products/i-mac.png" class="product-icon"/>
+          </a>
+
+          <div class="product-price">
+            <span class="price">99.999</span>
+            <br>
+            <span class="pdv">sa PDV-om</span>
+            <br>
+          </div>
+                <div class="product-add-to-cart">
+                    <a href="#" title="Kupi">
+
+                        <img src="images/shopping-cart.png" class="shopping-cart"/>
+                    </a>    
+                </div>
+
+        </div>
+
+    <div class="product">
+      <div class="product-title">
+        <a href="product-details.html">Šljam-sung</a>
+      </div>
+      <a href="product-details.html" class="product-image">
+                <img src="images/products/laptop-1.png" class="product-icon"/>
+      </a>
+      <div class="product-price">
+        <span class="price">666.666</span>
+        <br>
+        <span class="pdv">sa PDV-om</span>
+        <br>
+      </div>
+      <div class="product-add-to-cart">
+                <a href="#" title="Kupi">
+                <img src="images/shopping-cart.png" class="shopping-cart"/></a>
+            </div>
+    </div>
+
+    <div class="product">
+      <div class="product-title">
+        <a href="product-details.html">Šljam-sung</a>
+      </div>
+      <a href="product-details.html" class="product-image">
+                <img src="images/products/mac-pro.png" class="product-icon"/>
+      </a>
+      <div class="product-price">
+        <span class="price">99.999</span>
+        <br>
+        <span class="pdv">sa PDV-om</span>
+        <br>
+      </div>
+      <div class="product-add-to-cart">
+                <a href="#" title="Kupi">
+                <img src="images/shopping-cart.png" class="shopping-cart"/></a>
+            </div>
+    </div>
+
+    <div class="product">
+      <div class="product-title">
+        <a href="product-details.html">Šljam-sung</a>
+      </div>
+      <a href="product-details.html" class="product-image">
+                <img src="images/products/mac-pro-new.png" class="product-icon"/>
+      </a>
+      <div class="product-price">
+        <span class="price">Siromah</span>
+        <br>
+        <span class="pdv">sa PDV-om</span>
+        <br>
+      </div>
+      <div class="product-add-to-cart">
+                <a href="#" title="Kupi">
+                <img src="images/shopping-cart.png" class="shopping-cart"/></a>
+            </div>
+    </div>
+
+    <div class="product">
+      <div class="product-title">
+        <a href="product-details.html">Šljam-sung</a>
+      </div>
+      <a href="product-details.html" class="product-image">
+                <img src="images/products/macbook.png" class="product-icon"/>
+      </a>
+      <div class="product-price">
+        <span class="price">99.999</span>
+        <br>
+        <span class="pdv">sa PDV-om</span>
+        <br>
+      </div>
+      <div class="product-add-to-cart">
+                <a href="#" title="Kupi">
+                <img src="images/shopping-cart.png" class="shopping-cart"/></a>
+            </div>
+    </div>
+
+    <div class="product">
+      <div class="product-title">
+        <a href="product-details.html">Šljam-sung</a>
+      </div>
+      <a href="product-details.html" class="product-image">
+                <img src="images/products/pc-blue.png" class="product-icon"/>
+      </a>
+      <div class="product-price">
+        <span class="price">66.666</span>
+        <br>
+        <span class="pdv">sa PDV-om</span>
+        <br>
+      </div>
+      <div class="product-add-to-cart">
+                <a href="#" title="Kupi">
+                <img src="images/shopping-cart.png" class="shopping-cart"/></a>
+            </div>
+    </div>
+
+    <div class="product">
+      <div class="product-title">
+        <a href="product-details.html">Šljam-sung</a>
+      </div>
+      <a href="product-details.html" class="product-image">
+                <img src="images/products/monitor-1.png" class="product-icon"/>
+      </a>
+      <div class="product-price">
+        <span class="price">99.999</span>
+        <br>
+        <span class="pdv">sa PDV-om</span>
+        <br>
+      </div>
+      <div class="product-add-to-cart">
+                <a href="#" title="Kupi">
+                <img src="images/shopping-cart.png" class="shopping-cart"/></a>
+            </div>
+    </div>
+
+    <div class="product">
+      <div class="product-title">
+        <a href="product-details.html">Šljam-sung</a>
+      </div>
+      <a href="product-details.html" class="product-image">
+                <img src="images/products/pc-orange.png" class="product-icon"/>
+      </a>
+      <div class="product-price">
+        <span class="price">9.999</span>
+        <br>
+        <span class="pdv">sa PDV-om</span>
+        <br>
+      </div>
+      <div class="product-add-to-cart">
+                <a href="#" title="Kupi">
+                <img src="images/shopping-cart.png" class="shopping-cart"/></a>
+            </div>
+    </div>
+
+    <div class="product">
+      <div class="product-title">
+        <a href="product-details.html">Šljamsung</a>
+      </div>
+      <a href="product-details.html" class="product-image">
+                <img src="images/products/razer-blade.png" class="product-icon"/>
+      </a>
+      <div class="product-price">
+        <span class="price">99.999</span>
+        <br>
+        <span class="pdv">sa PDV-om</span>
+        <br>
+      </div>
+      <div class="product-add-to-cart">
+                <a href="#" title="Kupi">
+                <img src="images/shopping-cart.png" class="shopping-cart"/></a>
+            </div>
+    </div>
+  </div>
+  
+
+
+
+
+  
+
+  
+
+  </div>
+
+  
+
+    <div id="back-to-top">
+        <a href='#top' >
+        <i class="fa fa-chevron-up fa-3x"></i>
+        </a>
+    </div>
+
+    
+    <ul class="contact-us">
+      <li>
+        <a class="fa fa-phone" href="#">    
+          <span>Fiksni: 021/246-666</span>
+        </a> 
+      </li>
+
+      <li>
+        <a class="fa fa-mobile" href="#">
+          <span>Mobilni: 065/246-6668</span>
+        </a>
+      </li>
+        
+    
+
+      <li>
+        <a class="fa fa-envelope-o" href="mailto:stefanosengl@gmail.com?Subject=Postovani,%20imam jedno pitanje:">
+          <span>E-mail</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="fa fa-skype" href="skype:jecaraj?call">
+        <span>Skype</span>
+        </a> 
+      </li>
+        
+
+    </ul>
+
+    
+  <footer>
+        
+    <p>You Should Stay In Touch!</p>
+    <hr>
+    <div class="footer-social">
+        <ul>
+           <li>
+           <div id="circular-border">
+            <a title="Get news and updates via Facebook" id="contactPart" href="http://www.facebook.com"><img src="images/social/facebook.png" border="0"></a>
+           </div>
+           </li>
+           <li>
+           <div id="circular-border">
+            <a title="Get news and updates via Google+" href="http://plus.google.com"><img src="images/social/googleplus.png" border="0"></a>
+           </div>
+           </li>
+           <li>
+           <div id="circular-border">
+            <a title="Stay current on news via Twitter" href="https://www.twitter.com"><img src="images/social/twitter.png" border="0"></a>
+           </div>
+           </li>
+           <li>
+           <div id="circular-border">
+            <a title="Contact us via e-mail address" href="#"><img src="images/social/mail.png" border="0"></a>
+           </div>
+           </li>
+        </ul>
+      </div>
+      <hr>
+    <p>Copyright &copy; Ecliptica Web Design 2015</p>
+  </footer>
+</body>
+
+</html>
